@@ -42,12 +42,19 @@ const TARGET_TAGLINES: Record<string, string> = {
   travel: "양평 여행길에 꼭 들를 곳",
   family: "온 가족이 함께 즐겨요",
   couple: "둘이 오면 더 좋은 곳",
-  senior: "편안하고 넉넉하게 모십니다",
   local: "우리 동네 단골집",
   worker: "바쁜 일상 속 작은 쉼",
   pet: "반려견과 함께 오세요",
   gift: "마음을 전하기 좋은 선물",
+  single: "혼자 와도 편한 곳",
+  student: "친구랑 가볍게 들르기 좋은 곳",
+  camper: "캠핑 가는 길에 들르기 좋은 곳",
+  vegan: "가치를 담은 작은 선택",
+  taste: "나만 알고 싶은 취향",
 };
+
+/** 업종과 상관없이 쓸 수 있는 타깃 문구 (나머지는 방문형 업종에만) */
+const ANY_FIELD_TARGETS = ["gift", "vegan", "taste"];
 
 const PLACE_FIELDS = ["cafe", "food", "stay", "craft", "edu", "pet"];
 
@@ -95,8 +102,8 @@ export function resolveCopy(state: BuilderState): ResolvedCopy {
 
   const taglineList = [
     ...(state.oneLiner.trim() ? [state.oneLiner.trim()] : []),
-    // 방문형 업종에만 '들를 곳' 같은 장소 문구를 써요 (상품 판매형은 선물 문구만)
-    ...state.targets.filter((t) => PLACE_FIELDS.includes(state.field) || t === "gift").map((t) => TARGET_TAGLINES[t]).filter(Boolean),
+    // 방문형 업종에만 '들를 곳' 같은 장소 문구를 써요 (상품 판매형은 선물·가치·취향 문구만)
+    ...state.targets.filter((t) => PLACE_FIELDS.includes(state.field) || ANY_FIELD_TARGETS.includes(t)).map((t) => TARGET_TAGLINES[t]).filter(Boolean),
     ...(MOOD_TAGLINES[state.mood] ?? MOOD_TAGLINES.nature),
   ];
   const taglineSugg = pickDistinct(taglineList, s.tagline, headlineText) || pick(taglineList, s.tagline);

@@ -1,5 +1,4 @@
 import Logo from "./Logo";
-import TextSizeToggle from "./TextSizeToggle";
 
 export default function Header() {
   return (
@@ -18,9 +17,6 @@ export default function Header() {
           <a href="#guide" className="hidden rounded-lg px-3 py-1.5 hover:text-white md:inline">
             사용 가이드
           </a>
-          <span className="ml-1">
-            <TextSizeToggle />
-          </span>
         </nav>
       </div>
     </header>

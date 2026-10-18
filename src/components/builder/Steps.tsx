@@ -12,7 +12,6 @@ import {
   OUTPUT_TYPES,
   PLATFORMS,
   PRODUCT_SHOTS,
-  STYLES,
   TARGETS,
   byId,
   resolveStyle,
@@ -23,6 +22,7 @@ import { FACT_KEYS, type BuilderState, type CopyKey, type FactKey, type InfoMode
 import type { ResolvedCopy } from "@/lib/suggest";
 import { Chips, Field, MultiChips, StepCard, Toggle, chipClass, inputClass } from "../ui";
 import InfoRow, { ModeSwitch } from "./InfoRow";
+import StylePicker from "./StylePicker";
 
 type Common = { state: BuilderState; onPatch: (p: Partial<BuilderState>) => void };
 
@@ -278,7 +278,6 @@ export function StepDesign({ state, onPatch, copy, onMode, onValue, onShuffle, o
   const showKeys = (["brand", ...FACT_KEYS] as ShowKey[]).filter((k) => output.priority.includes(k) || (state.output === "cardnews" && state.cardMode === "set"));
   const styleOn = usesStyle(state);
   const auto = resolveStyle(null, state.output, state.mood);
-  const styles = STYLES.filter((s) => output.styles.includes(s.id));
   const toggleAvoid = (id: string) => onPatch({ avoid: state.avoid.includes(id) ? state.avoid.filter((a) => a !== id) : [...state.avoid, id] });
   const pm = state.points.mode;
   return (
@@ -404,8 +403,8 @@ export function StepDesign({ state, onPatch, copy, onMode, onValue, onShuffle, o
 
       {styleOn && (
         <Field label="디자인 스타일" hint={state.style ? "다시 누르면 자동 추천으로" : `자동 추천: ${auto.label}`}>
-          <Chips ariaLabel="디자인 스타일" allowDeselect options={styles} value={state.style} onChange={(style) => onPatch({ style })} />
-          <p className="mt-2 text-sm text-mute">스타일마다 서체·구도·색 쓰는 법·질감이 달라요. 고르지 않으면 브랜드 무드에 맞춰 골라요.</p>
+          <StylePicker key={state.output} state={state} onPick={(style) => onPatch({ style })} />
+          <p className="mt-2 text-sm text-mute">스타일마다 서체·구도·색 쓰는 법·질감이 달라요. 고르지 않으면 노란 테두리의 &lsquo;기본&rsquo; 스타일로 만들어요.</p>
         </Field>
       )}
       {state.output !== "logo" && (

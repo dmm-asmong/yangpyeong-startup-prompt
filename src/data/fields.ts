@@ -104,7 +104,7 @@ export const FIELD_BANKS: Record<string, FieldBank> = {
     lifestyle: { ko: "창가 책상 위 노트북과 휴대폰, 밝은 낮", en: "a laptop and phone on a desk by a window in bright daylight" },
     motif: { ko: "단순한 휴대폰 화면 하나(글자 대신 블록)", en: "one simple phone screen (blocks instead of text)" },
     headlines: ["동네 가게를 더 쉽게, {item}", "클릭 한 번이면, {item}", "작은 가게를 위한 {item}", "시간을 아껴 주는 {item}"],
-    points: ["3분이면 시작하는 간단한 가입", "어르신도 쉬운 큰 글씨 화면", "지역 소상공인 맞춤 기능", "첫 달 무료 체험", "전화 상담 지원"],
+    points: ["3분이면 시작하는 간단한 가입", "가입 없이 바로 쓰는 간편 모드", "지역 소상공인 맞춤 기능", "첫 달 무료 체험", "전화 상담 지원"],
     hashtags: ["#로컬서비스", "#소상공인", "#스타트업", "#창업"],
     board: { ko: "책상 위 노트북, 손으로 그린 화면 스케치, 포스트잇, 창밖 풍경, 커피잔", en: "a laptop on a desk, hand-drawn screen sketches, sticky notes, a window view, a coffee cup" },
   },

@@ -18,11 +18,15 @@ const TARGET_TAG: Record<string, string> = {
   travel: "#양평여행",
   family: "#아이와가볼만한곳",
   couple: "#양평데이트",
-  senior: "#효도여행",
   local: "#양평주민",
   worker: "#주말나들이",
   pet: "#반려견동반",
   gift: "#선물추천",
+  single: "#1인가구",
+  student: "#대학생추천",
+  camper: "#캠핑",
+  vegan: "#제로웨이스트",
+  taste: "#취향저격",
 };
 
 const FIELD_TAG: Record<string, string> = {

@@ -27,11 +27,6 @@ html {
   font-size: 100%;
 }
 
-/* 어르신·저시력 교육생을 위한 '글자 크게' (rem 단위가 모두 함께 커져요) */
-html[data-size="lg"] {
-  font-size: 118.75%;
-}
-
 body {
   background: var(--background);
   color: var(--foreground);

@@ -21,13 +21,13 @@ export default function Hero() {
             <span className="h-2 w-2 rounded-full bg-sun" /> 양평군 창업 AI 활용 교육 · 교육생용
           </p>
           <h1 className="text-[2.1rem] font-black leading-[1.18] tracking-tight text-ink sm:text-5xl">
-            내 가게 홍보물,
+            내 브랜드 홍보물,
             <br />
             <span className="relative inline-block">
               <span className="relative z-10">프롬프트 한 장</span>
               <span aria-hidden className="absolute inset-x-0 bottom-1 z-0 h-3 rounded-full bg-sun/60 sm:h-4" />
             </span>
-            으로 시작해요.
+            으로.
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-mute">
             창업 아이템·타깃 고객·브랜드 무드만 고르면 포스터, 카드뉴스, 제품 사진, 무드보드, SNS·스마트스토어 이미지를 만드는{" "}
@@ -38,7 +38,7 @@ export default function Hero() {
               홍보물 만들기 →
             </a>
             <a href="#guide" className="rounded-2xl border border-line bg-card px-6 py-4 text-base font-bold text-ink hover:border-moss">
-              처음이라면 사용 가이드
+              3분 사용법
             </a>
           </div>
           <dl className="mt-10 flex gap-9">
