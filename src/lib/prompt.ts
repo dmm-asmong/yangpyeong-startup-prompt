@@ -266,7 +266,7 @@ export function buildPrompt(state: BuilderState, lang: Lang): string {
   sections.push(
     ko
       ? `디자인 브리프: 경기도 양평에서 창업한 ${who}(${what})의 ${phrase.ko}${josa(phrase.ko, "을", "를")} 만들어 줘. 한국의 실력 있는 로컬 브랜드 디자이너·포토그래퍼가 작업한 실제 결과물처럼 — 뻔한 템플릿이나 AI 그림 같은 느낌 없이.`
-      : `Design brief: Create a ${phrase.en} for ${who} (${what}), a new local business in Yangpyeong, Gyeonggi-do, Korea. It should look like real work by a skilled Korean local-brand designer and photographer — never like a template or an AI image.`,
+      : `Design brief: Create ${/^[aeiou]/i.test(phrase.en) ? "an" : "a"} ${phrase.en} for ${who} (${what}), a new local business in Yangpyeong, Gyeonggi-do, Korea. It should look like real work by a skilled Korean local-brand designer and photographer — never like a template or an AI image.`,
   );
   const targets = [...state.targets.map((id) => byId(TARGETS, id)?.[ko ? "label" : "en"]).filter(Boolean), state.targetText.trim()].filter(Boolean).join(", ");
   sections.push(
@@ -295,7 +295,7 @@ export function buildPrompt(state: BuilderState, lang: Lang): string {
 
   // 4. 레이아웃
   const comp = compositionFor(state, lang, hasText);
-  const layout = comp ?? (style ? fillStyle(style.layout[lang], vars) : "");
+  const layout = comp ?? (style ? fillStyle(style.layout[lang], { ...vars, hero: t("주제 이미지", "the main subject") }) : "");
   const qr = state.qrSlot ? t(" 오른쪽 아래 안전 여백 안쪽에 QR 코드를 붙일 단색 정사각형 빈칸(가짜 QR 무늬 금지).", " Leave an empty solid square for a QR code at bottom-right inside the safe margin (no fake QR pattern).") : "";
   sections.push(
     ko

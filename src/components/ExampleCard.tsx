@@ -27,13 +27,13 @@ export default function ExampleCard({ example, state, prompt, image, onStart, on
   return (
     <article className="group flex flex-col overflow-hidden rounded-[24px] border border-line bg-white transition hover:-translate-y-0.5 hover:shadow-lg">
       {showImage ? (
-        <button type="button" onClick={() => onOpen(example)} aria-label={`${example.title} 예시 이미지 크게 보기`} className="relative block aspect-[4/3] w-full overflow-hidden bg-paper">
+        <button type="button" onClick={() => onOpen(example)} aria-label={`${example.title} 예시 이미지 크게 보기`} className="relative block aspect-video w-full overflow-hidden bg-paper">
           <Image
             src={image}
             alt={`${example.title} AI 생성 예시 이미지`}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
-            className="object-contain transition duration-300 group-hover:scale-[1.02]"
+            className="object-cover transition duration-300 group-hover:scale-[1.02]"
             onError={() => setFailed(true)}
           />
           <span className="absolute bottom-2 right-2 rounded-lg bg-ink/80 px-2 py-1 text-xs font-bold text-white">🔍 크게 보기</span>

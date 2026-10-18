@@ -93,7 +93,7 @@ export type OutputType = {
   draft?: boolean;
 };
 
-const ALL_STYLES = ["daylight", "kitchen", "editorial", "craftlabel", "studio", "watercolor", "market", "flyer", "brutalsale", "collage", "cinematic", "swiss"];
+const ALL_STYLES = ["daylight", "kitchen", "editorial", "craftlabel", "studio", "watercolor", "market", "flyer", "banner", "brutalsale", "collage", "cinematic", "swiss"];
 
 export const OUTPUT_TYPES: OutputType[] = [
   {
@@ -287,6 +287,15 @@ export const STYLES: Style[] = [
     palette: { ko: "미색 신문 용지와 먹색, {B}는 박스 테두리와 강조에만", en: "off-white newsprint and black ink; {B} only for the box border and highlights" },
     texture: { ko: "신문 용지 결, 거친 망점, 살짝 고르지 않은 잉크", en: "newsprint grain, coarse halftone dots, slightly uneven ink" },
     imagery: { ko: "망점 흑백 사진: {hero}", en: "a black-and-white halftone photo: {hero}" },
+  },
+  {
+    id: "banner", label: "맛집 띠 배너", emoji: "🍲", hint: "식욕·한눈에", en: "bold Korean food-shop banner", photo: true,
+    brief: { ko: "동네 맛집 오픈·행사 배너 — 김이 오르는 음식 사진 아래 진한 색 띠에 굵은 글자, 멀리서도 한눈에 읽히는 정직한 광고", en: "a local restaurant opening / event banner — a steaming food photo above a solid color band with heavy type, an honest ad readable at a glance from afar" },
+    type: { ko: "헤드라인은 Pretendard Black 같은 아주 굵은 한글 고딕을 흰색으로 크게, 혜택은 {A} 굵은 고딕 한 줄, 브랜드명은 띠 위쪽 작은 흰 둥근 이름표 안 짙은 글자, 정보는 흰색 미디엄 고딕", en: "an extra-heavy Korean gothic (in the style of Pretendard Black) for the headline, large and white; the offer as one line of bold gothic in {A}; the brand name in dark letters inside a small white rounded name tag at the top of the band; info in white medium gothic" },
+    layout: { ko: "위쪽 약 55~60%는 주제 이미지 사진이 가장자리까지 채움. 아래 약 40%는 {B} 단색 띠(살짝 진하게): 왼쪽 정렬로 브랜드명 이름표 → 헤드라인 → 혜택 → 정보 줄(날짜·위치·연락처를 가는 세로선으로 나눠 한 줄). 띠와 사진 경계는 반듯한 직선", en: "the top ~55–60% is the main subject photo, full-bleed. The bottom ~40% is a solid band in {B} (slightly deepened): left-aligned brand-name tag → headline → offer → one info line (date, place and contact split by thin vertical bars). A clean straight edge between photo and band" },
+    palette: { ko: "사진은 따뜻하고 식욕 도는 자연색, 띠는 {B} 한 색, 글자는 흰색과 {A}만", en: "warm, appetizing natural color in the photo; the band in {B} only; text in white and {A} only" },
+    texture: { ko: "어두운 나무 테이블, 한쪽에서 드는 따뜻한 빛과 피어오르는 김, 띠는 평면 인쇄(그라데이션·그림자 없음)", en: "a dark wooden table, warm side light and rising steam; the band is flat print with no gradient or shadow" },
+    imagery: { ko: "가까이서 찍은 실제 음식 사진: {hero}", en: "a real close-up food photograph: {hero}" },
   },
   {
     id: "brutalsale", label: "브루탈 세일", emoji: "⬛", hint: "할인·임팩트", en: "neo-brutalist sale poster", photo: true,

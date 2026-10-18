@@ -45,7 +45,7 @@ export default function Gallery({ images, onStart }: Props) {
           </button>
         ))}
       </div>
-      {anyImage && <p className="text-sm text-mute">🖼️ 이미지는 각 예시 프롬프트로 만든 AI 예시예요. 같은 프롬프트라도 AI와 시도마다 결과가 달라요.</p>}
+      {anyImage && <p className="text-sm text-mute">🖼️ 갤러리 이미지는 한눈에 비교하기 쉽게 모두 16:9 가로형으로 만든 AI 샘플이에요. 실제로 만들 때는 카드에 적힌 크기(1:1, 4:5, 9:16, A4 등)로 나와요. 같은 프롬프트라도 AI와 시도마다 결과가 조금씩 달라요.</p>}
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {list.map(({ ex, state, prompt }) => (
           <ExampleCard key={ex.id} example={ex} state={state} prompt={prompt} image={srcOf(ex)} onStart={onStart} onOpen={setOpened} />
