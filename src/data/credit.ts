@@ -5,7 +5,7 @@
 export const CREATOR_EMAIL = "asmong.better@gmail.com";
 
 export const CREATOR = {
-  name: "양○○ (애즈몽)",
+  name: "양혜영(애즈몽)",
   intro: "양평군 청년 창업 AI 활용 교육 강사 · 이 도구를 기획하고 만들었어요",
 };
 
