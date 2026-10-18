@@ -56,6 +56,9 @@ const TARGET_TAGLINES: Record<string, string> = {
 /** 업종과 상관없이 쓸 수 있는 타깃 문구 (나머지는 방문형 업종에만) */
 const ANY_FIELD_TARGETS = ["gift", "vegan", "taste"];
 
+/** 추천 문구에서 뺄 지역 이름 */
+const PLACE_WORD = /양평|용문|두물머리|남한강/;
+
 const PLACE_FIELDS = ["cafe", "food", "stay", "craft", "edu", "pet"];
 
 const CTAS: Record<string, string[]> = {
@@ -93,18 +96,20 @@ export function resolveCopy(state: BuilderState): ResolvedCopy {
   const own = (k: CopyKey) => (state.copy[k].mode === "omit" ? "" : state.copy[k].value.trim());
   const fill = (t: string) => t.replaceAll("{item}", itemName).replaceAll("{brand}", brandName || itemName);
 
+  // 추천 문구에는 지역 이름을 넣지 않아요 (이미지 글자에 지역명은 사용자가 직접 쓴 것만)
+  const noPlace = (t: string) => !PLACE_WORD.test(t);
   const headlineList =
     state.output === "event"
       ? eventHeadlines(state, itemName, brandName)
-      : [...bank.headlines.map(fill), ...(brandName ? [`${brandName}에서 만나요`] : [])];
+      : [...bank.headlines.filter(noPlace).map(fill), ...(brandName ? [`${brandName}에서 만나요`] : [])];
   const headlineSugg = pickDistinct(headlineList, s.headline, own("tagline")) || pick(headlineList, s.headline);
   const headlineText = state.copy.headline.mode === "omit" ? "" : own("headline") || headlineSugg;
 
   const taglineList = [
     ...(state.oneLiner.trim() ? [state.oneLiner.trim()] : []),
     // 방문형 업종에만 '들를 곳' 같은 장소 문구를 써요 (상품 판매형은 선물·가치·취향 문구만)
-    ...state.targets.filter((t) => PLACE_FIELDS.includes(state.field) || ANY_FIELD_TARGETS.includes(t)).map((t) => TARGET_TAGLINES[t]).filter(Boolean),
-    ...(MOOD_TAGLINES[state.mood] ?? MOOD_TAGLINES.nature),
+    ...state.targets.filter((t) => PLACE_FIELDS.includes(state.field) || ANY_FIELD_TARGETS.includes(t)).map((t) => TARGET_TAGLINES[t]).filter((t) => t && noPlace(t)),
+    ...(MOOD_TAGLINES[state.mood] ?? MOOD_TAGLINES.nature).filter(noPlace),
   ];
   const taglineSugg = pickDistinct(taglineList, s.tagline, headlineText) || pick(taglineList, s.tagline);
   const ctaList = CTAS[state.platform] ?? CTAS.feed;
@@ -118,9 +123,9 @@ export function resolveCopy(state: BuilderState): ResolvedCopy {
     const { mode, value } = state.copy[key];
     out[key] = { mode, suggestion: sugg[key], text: mode === "omit" ? "" : mode === "exact" ? value.trim() : value.trim() || sugg[key] };
   }
-  const list = bank.points;
+  const list = bank.points.filter(noPlace);
   const start = (s.points * 2) % list.length;
-  const suggestion = [0, 1, 2, 3].map((i) => list[(start + i) % list.length]);
+  const suggestion = Array.from({ length: Math.min(4, list.length) }, (_, i) => list[(start + i) % list.length]);
   const pm = state.points.mode;
   const typed = state.points.items.map((x) => x.trim()).filter(Boolean);
   const items = pm === "omit" ? [] : pm === "exact" ? typed : suggestion;

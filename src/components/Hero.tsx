@@ -81,7 +81,7 @@ export default function Hero() {
           <div className="absolute bottom-6 right-0 w-64 rotate-[-1.5deg] rounded-2xl bg-ink p-4 text-white shadow-2xl sm:w-72">
             <p className="text-[11px] font-bold text-sun">🖼️ 이미지 프롬프트</p>
             <p className="mt-1.5 text-xs leading-relaxed text-white/80">
-              디자인 브리프: 경기도 양평에서 창업한 &lsquo;두물딸기&rsquo;의 제품 사진을 만들어 줘. 실제 로컬 브랜드 포토그래퍼가 찍은 것처럼…
+              디자인 브리프: 새로 시작한 로컬 브랜드 &lsquo;두물딸기&rsquo;의 연출컷 제품 사진을 만들어 줘. 실제 로컬 브랜드 포토그래퍼가 찍은 것처럼…
             </p>
             <p className="mt-2.5 text-[11px] font-semibold text-[#9fd3b4]">#양평 #로컬푸드 #두물딸기</p>
           </div>

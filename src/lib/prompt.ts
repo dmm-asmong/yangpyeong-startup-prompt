@@ -204,7 +204,7 @@ function heroFor(state: BuilderState, copy: ResolvedCopy, style: Style | null, l
     return local
       ? `${local.photo[lang]}${ko ? " — 그 풍경 속에 작게 " : " — with, small within the landscape, "}${subject}`
       : `${copy.bank.lifestyle[lang]}${ko ? " — 넓은 풍경 속에 " : " — a wide view that includes "}${subject}`;
-  const setting = local ? `${ko ? "양평의 " : "a Yangpyeong-like "}${local.photo[lang]}${ko ? "가 배경으로 보이는 곳" : " in the background"}` : copy.bank.lifestyle[lang];
+  const setting = local ? `${ko ? "배경에는 " : "with "}${local.photo[lang]}${ko ? "" : " in the background"}` : copy.bank.lifestyle[lang];
   return `${subject}${ko ? ", " : ", "}${setting}`;
 }
 
@@ -265,8 +265,8 @@ export function buildPrompt(state: BuilderState, lang: Lang): string {
   const what = [field?.[ko ? "label" : "en"], state.item.trim() && state.item.trim() !== copy.brandName ? state.item.trim() : ""].filter(Boolean).join(" · ");
   sections.push(
     ko
-      ? `디자인 브리프: 경기도 양평에서 창업한 ${who}(${what})의 ${phrase.ko}${josa(phrase.ko, "을", "를")} 만들어 줘. 한국의 실력 있는 로컬 브랜드 디자이너·포토그래퍼가 작업한 실제 결과물처럼 — 뻔한 템플릿이나 AI 그림 같은 느낌 없이.`
-      : `Design brief: Create ${/^[aeiou]/i.test(phrase.en) ? "an" : "a"} ${phrase.en} for ${who} (${what}), a new local business in Yangpyeong, Gyeonggi-do, Korea. It should look like real work by a skilled Korean local-brand designer and photographer — never like a template or an AI image.`,
+      ? `디자인 브리프: ${copy.brandName ? "새로 시작한 로컬 브랜드 " : ""}${who}(${what})의 ${phrase.ko}${josa(phrase.ko, "을", "를")} 만들어 줘. 한국의 실력 있는 로컬 브랜드 디자이너·포토그래퍼가 작업한 실제 결과물처럼 — 뻔한 템플릿이나 AI 그림 같은 느낌 없이.`
+      : `Design brief: Create ${/^[aeiou]/i.test(phrase.en) ? "an" : "a"} ${phrase.en} for ${who} (${what})${copy.brandName ? ", a new local brand" : ""}. It should look like real work by a skilled Korean local-brand designer and photographer — never like a template or an AI image.`,
   );
   const targets = [...state.targets.map((id) => byId(TARGETS, id)?.[ko ? "label" : "en"]).filter(Boolean), state.targetText.trim()].filter(Boolean).join(", ");
   sections.push(
@@ -333,8 +333,8 @@ export function buildPrompt(state: BuilderState, lang: Lang): string {
   const local = state.local && !cutout ? byId(LOCAL_SCENES, state.localScene) : undefined;
   const localNote = local
     ? t(
-        ` 지역감: 양평의 ${local.label} 같은 분위기만 담아 — 특정 랜드마크를 그대로 베끼거나 지명 간판을 넣지는 마.`,
-        ` Local feel: evoke the mood of Yangpyeong (${local.en}) without copying a specific landmark or adding place-name signs.`,
+        ` 배경 풍경: '${local.label}' 느낌의 자연 풍경(강·산자락·들판)으로만 분위기를 담아 — 특정 랜드마크를 그대로 베끼지 말고, 지명 간판이나 지역 이름 글자는 이미지에 넣지 마.`,
+        ` Background scenery: a natural Korean landscape of ${local.en} (river, mountain foothills, fields) for mood only — do not copy a specific landmark, and do not render place-name signs or any place name as text.`,
       )
     : "";
   sections.push(`${t("이미지", "Imagery")}: ${imagery}.${people}${localNote} ${t("장면에 필요한 것 말고 떠다니는 아이콘·장식은 넣지 마.", "No floating icons or decorations beyond what the scene needs.")}`);
@@ -396,8 +396,8 @@ function buildLogoPrompt(state: BuilderState, copy: ResolvedCopy, lang: Lang): s
   const local = state.local ? byId(LOCAL_SCENES, state.localScene) : undefined;
   const lines: string[] = [];
   if (ko) {
-    lines.push(`디자인 브리프: 경기도 양평의 창업 브랜드 '${brand}'(${field?.label ?? ""})의 로고 컨셉 시안을 만들어 줘. 브랜드 무드: ${mood?.tone.ko ?? ""}. 최종 로고가 아니라 방향을 고르기 위한 시안이야.`);
-    lines.push(`로고 유형: ${type.brief.ko}.${local ? ` 양평의 ${local.label} 느낌을 아주 단순한 선이나 형태 하나로만 은유해도 좋아(풍경을 그대로 그리지 말 것).` : ""}`);
+    lines.push(`디자인 브리프: 로컬 창업 브랜드 '${brand}'(${field?.label ?? ""})의 로고 컨셉 시안을 만들어 줘. 브랜드 무드: ${mood?.tone.ko ?? ""}. 최종 로고가 아니라 방향을 고르기 위한 시안이야.`);
+    lines.push(`로고 유형: ${type.brief.ko}.${local ? ` '${local.label}' 같은 자연 풍경을 아주 단순한 선이나 형태 하나로만 은유해도 좋아(풍경을 그대로 그리지 말고, 지역 이름 글자는 넣지 말 것).` : ""}`);
     lines.push("캔버스: 1:1 정사각형 1080×1080, 흰 배경의 정면 평면 시안 보드.");
     lines.push("레이아웃: 가운데에 큰 메인 로고 하나, 그 아래 작은 크기로 같은 로고의 흑백 버전과 반전 버전(어두운 바탕 위 흰색)을 나란히 두 개. 세 로고는 형태가 완전히 같아야 해.");
     lines.push(`컬러: ${color.ko}와 먹색, 2색 이내. 포인트로 ${color.accent}를 아주 조금만 써도 돼.`);
@@ -405,8 +405,8 @@ function buildLogoPrompt(state: BuilderState, copy: ResolvedCopy, lang: Lang): s
     lines.push(`들어갈 글자(따옴표 안 그대로, 세 버전에 똑같이 반복되는 것만 허용):\n1) 로고 글자: "${brand}"${tagline ? `\n2) 보조 문구(메인 로고 아래에만 작게): "${tagline}"` : ""}\n목록 밖 글자·숫자·영문은 넣지 마.`);
     lines.push(`피할 것: ${ANTI_AI_LOGO.ko}.`);
   } else {
-    lines.push(`Design brief: Create a logo concept draft for "${brand}", a start-up brand in Yangpyeong, Gyeonggi-do, Korea (${field?.en ?? ""}). Brand mood: ${mood?.tone.en ?? ""}. This is a draft for choosing a direction, not a final logo.`);
-    lines.push(`Logo type: ${type.brief.en}.${local ? ` You may hint at Yangpyeong (${local.en}) with a single very simple line or shape — do not draw a landscape.` : ""}`);
+    lines.push(`Design brief: Create a logo concept draft for "${brand}", a local start-up brand (${field?.en ?? ""}). Brand mood: ${mood?.tone.en ?? ""}. This is a draft for choosing a direction, not a final logo.`);
+    lines.push(`Logo type: ${type.brief.en}.${local ? ` You may hint at the local scenery (${local.en}) with a single very simple line or shape — do not draw a landscape or write any place name.` : ""}`);
     lines.push("Canvas: 1:1 square 1080×1080, a flat front-facing presentation board on white.");
     lines.push("Layout: one large main logo in the center; below it, two small versions of the same logo side by side — a black-only version and a reversed version (white on a dark tile). All three must have exactly the same form.");
     lines.push(`Color: ${color.en} and ink-black, two colors max; a tiny touch of ${color.accentEn} (${color.accent}) is optional.`);

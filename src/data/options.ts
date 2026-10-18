@@ -417,7 +417,7 @@ export const STYLES: Style[] = [
     layout: { ko: "캐릭터 하나가 가운데에 크게(캔버스 높이의 45~55%), 제품을 들고 있거나 제품 옆에서 한 가지 동작. 헤드라인은 캐릭터 위쪽에 가운데 정렬, 카피는 캐릭터 옆 말풍선 하나에 짧게. 혜택은 캐릭터 발밑 {A} 리본, 브랜드명과 정보 줄은 맨 아래 가운데", en: "one character large in the center (45–55% of canvas height), holding the product or doing one action beside it; the headline centered above the character; the tagline short inside one speech bubble beside it; the offer on an {A} ribbon at its feet; brand name and info line centered at the bottom" },
     palette: { ko: "{B} 단색 바탕, 캐릭터는 흰색·먹색 외곽선·{A} 세 가지로만", en: "a solid {B} background; the character in white, ink-black outline and {A} only" },
     texture: { ko: "평면 채색, 일정한 외곽선, 아주 옅은 종이 결. 3D 렌더·광택·그라데이션 볼 터치 금지", en: "flat fills, even outlines, faint paper grain; no 3D render, gloss or gradient cheek shading" },
-    imagery: { ko: "브랜드나 제품을 닮은(또는 양평의 동물·식물을 단순화한) 단순한 캐릭터 하나, 함께 그릴 것: {hero}", en: "a character that resembles the product (or a simplified local animal or plant), together with {hero}" },
+    imagery: { ko: "브랜드나 제품을 닮은(또는 지역의 동물·식물을 단순화한) 단순한 캐릭터 하나, 함께 그릴 것: {hero}", en: "a character that resembles the product (or a simplified local animal or plant), together with {hero}" },
   },
   {
     id: "sculpt", group: "photo", isNew: true, label: "조형 오브제 스틸라이프", emoji: "🗿", hint: "감도·프리미엄", en: "sculptural still life", photo: true,
