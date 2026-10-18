@@ -1,3 +1,4 @@
+import { CREATOR, creatorMailto } from "@/data/credit";
 import { SectionTitle } from "./ui";
 
 const STEPS = [
@@ -66,6 +67,7 @@ const FAQ = [
 ];
 
 export default function Guide() {
+  const mailto = creatorMailto();
   return (
     <section id="guide" className="scroll-mt-16 bg-ink py-16 text-white sm:py-24">
       <div className="mx-auto max-w-6xl px-4">
@@ -121,6 +123,24 @@ export default function Guide() {
             </details>
           ))}
         </div>
+
+        <aside id="creator" aria-label="만든 사람" className="mt-14 flex flex-col gap-5 rounded-[24px] bg-white/[0.06] p-6 ring-1 ring-white/10 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+          <div className="flex items-center gap-4">
+            <span aria-hidden className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-sun text-2xl">
+              🌱
+            </span>
+            <div>
+              <p className="text-xs font-bold tracking-[0.2em] text-sun">만든 사람</p>
+              <p className="mt-1 text-xl font-extrabold">{CREATOR.name}</p>
+              <p className="mt-1 text-base leading-relaxed text-white/70">{CREATOR.intro}</p>
+            </div>
+          </div>
+          {mailto && (
+            <a href={mailto} className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-2xl bg-sun px-5 py-3 text-base font-extrabold text-ink hover:brightness-105">
+              ✉️ 문의하기
+            </a>
+          )}
+        </aside>
       </div>
     </section>
   );
