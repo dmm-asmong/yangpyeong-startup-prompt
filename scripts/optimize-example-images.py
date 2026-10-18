@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+"""raw-examples/<id>.(png|jpg|jpeg|webp) 원본을 public/examples/<id>.webp 로 줄입니다.
+예시 id 목록은 src/data/examples.ts 의 id: "..." 에서 읽어요. (원본 폴더는 git에 올리지 않아요)
+결과 파일 이름에는 내용 해시가 붙어요(<id>.<hash8>.webp). 이미지를 바꾸면 주소도 바뀌어서
+브라우저·CDN·이미지 최적화 캐시가 옛 이미지를 보여 주지 않아요. 같은 id 의 옛 파일은 지워요.
+빌드할 때 public/examples 에 파일이 있는 예시만 이미지로 보이고, 없으면 미리보기 카드가 나와요.
+
+    python3 scripts/optimize-example-images.py [--long 1024] [--quality 80]
+"""
+import argparse
+import hashlib
+import io
+import pathlib
+import re
+
+from PIL import Image
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+RAW = ROOT / "raw-examples"
+OUT = ROOT / "public" / "examples"
+EXTS = (".png", ".jpg", ".jpeg", ".webp")
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--long", type=int, default=1024)
+    ap.add_argument("--quality", type=int, default=80)
+    args = ap.parse_args()
+
+    examples = (ROOT / "src" / "data" / "examples.ts").read_text(encoding="utf-8")
+    known = set(re.findall(r'^\s*id: "([a-z0-9-]+)"', examples, flags=re.M))
+    OUT.mkdir(parents=True, exist_ok=True)
+
+    done = {}
+    for src in sorted(RAW.iterdir()):
+        if src.suffix.lower() not in EXTS or src.stem not in known:
+            continue
+        im = Image.open(src).convert("RGB")
+        im.thumbnail((args.long, args.long), Image.LANCZOS)
+        buf = io.BytesIO()
+        im.save(buf, "WEBP", quality=args.quality, method=6)
+        data = buf.getvalue()
+        digest = hashlib.sha256(data).hexdigest()[:8]
+        dst = OUT / f"{src.stem}.{digest}.webp"
+        for old in OUT.glob(f"{src.stem}*.webp"):
+            if old != dst and old.name.split(".")[0] == src.stem:
+                old.unlink()
+        dst.write_bytes(data)
+        done[src.stem] = len(data)
+
+    present = {p.name.split(".")[0] for p in OUT.glob("*.webp")} & known
+    print(f"converted: {len(done)}  present: {len(present)}/{len(known)}  ({sum(done.values()) / 1024:.0f} KB new)")
+    missing = sorted(known - present)
+    if missing:
+        print("missing:", ", ".join(missing))
+
+
+if __name__ == "__main__":
+    main()
