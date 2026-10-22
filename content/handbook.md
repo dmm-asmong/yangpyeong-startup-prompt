@@ -386,62 +386,79 @@ Typography:
 ```
 
 ### 1. 품질 & 사실감 키워드
-- `photorealistic` : 사진처럼 사실적인 결과
-- `professional photography` : 상업·편집 사진 느낌
-- `highly detailed`, `sharp focus`, `crisp details` : 디테일과 선명도 강조
-- `8K`, `high resolution` : 고해상도 느낌
-- `DSLR photo`, `RAW photo` : 실제 카메라 촬영 느낌
-- `commercial e-commerce style` : 이커머스 상업 사진 톤
+
+| 키워드 | 효과 |
+|---|---|
+| `photorealistic` | 사진처럼 사실적인 결과 |
+| `professional photography` | 상업·편집 사진 느낌 |
+| `highly detailed`, `sharp focus`, `crisp details` | 디테일과 선명도 강조 |
+| `8K`, `high resolution` | 고해상도 느낌 |
+| `DSLR photo`, `RAW photo` | 실제 카메라 촬영 느낌 |
+| `commercial e-commerce style` | 이커머스 상업 사진 톤 |
 
 ---
 
 ### 2. 구도 & 카메라 키워드
-- **인물 중심:** `portrait`, `headshot`, `close-up`, `three-quarter view`
-- **전신·관계 표현:** `full-body shot`, `medium shot`, `wide shot`
-- **공간감 & 화각:** `wide-angle lens`, `aerial view`, `bird’s-eye view`
-- **감성 인물·제품:** `85mm portrait lens`, `shallow depth of field`, `bokeh`
-- **시점·앵글:** `low-angle shot`, `high-angle shot`, `eye-level`, `overhead shot` (top-down / flat lay)
-- **안정된 화면 구성:** `centered composition`, `rule of thirds`, `symmetrical composition`
+
+| 분류 | 키워드 |
+|---|---|
+| 인물 중심 | `portrait`, `headshot`, `close-up`, `three-quarter view` |
+| 전신·관계 표현 | `full-body shot`, `medium shot`, `wide shot` |
+| 공간감 & 화각 | `wide-angle lens`, `aerial view`, `bird’s-eye view` |
+| 감성 인물·제품 | `85mm portrait lens`, `shallow depth of field`, `bokeh` |
+| 시점·앵글 | `low-angle shot`, `high-angle shot`, `eye-level`, `overhead shot` (top-down / flat lay) |
+| 안정된 화면 구성 | `centered composition`, `rule of thirds`, `symmetrical composition` |
 
 ---
 
 ### 3. 조명 키워드
-- `soft natural light`, `window light` : 자연스럽고 부드러운 느낌 (실패 없는 기본 조명)
-- `golden hour` : 따뜻하고 감성적인 저녁 빛
-- `cinematic lighting` : 영화 같은 명암과 분위기
-- `studio lighting`, `softbox lighting` : 제품·인물 촬영용 균일한 상업 조명
-- `dramatic side light`, `rim light` : 입체감과 극적인 윤곽 대비
-- `neon glow`, `backlit` : 도시적, 미래적, 역동적인 역광 분위기
+
+| 키워드 | 효과 |
+|---|---|
+| `soft natural light`, `window light` | 자연스럽고 부드러운 느낌 (실패 없는 기본 조명) |
+| `golden hour` | 따뜻하고 감성적인 저녁 빛 |
+| `cinematic lighting` | 영화 같은 명암과 분위기 |
+| `studio lighting`, `softbox lighting` | 제품·인물 촬영용 균일한 상업 조명 |
+| `dramatic side light`, `rim light` | 입체감과 극적인 윤곽 대비 |
+| `neon glow`, `backlit` | 도시적, 미래적, 역동적인 역광 분위기 |
 
 ---
 
 ### 4. 색감 & 분위기 키워드
-- `warm tones`, `cozy`, `bright and airy` : 친근하고 편안한 교육·브랜딩 이미지
-- `muted colors`, `pastel tones`, `minimal` : 차분하고 세련된 느낌
-- `vibrant colors`, `energetic` : 광고·행사·홍보용 강한 인상
-- `moody`, `dark and moody` : 드라마틱하거나 서사적인 이미지
-- `ethereal`, `dreamy`, `cinematic` : 감성적, 예술적 결과물
+
+| 키워드 | 효과 |
+|---|---|
+| `warm tones`, `cozy`, `bright and airy` | 친근하고 편안한 교육·브랜딩 이미지 |
+| `muted colors`, `pastel tones`, `minimal` | 차분하고 세련된 느낌 |
+| `vibrant colors`, `energetic` | 광고·행사·홍보용 강한 인상 |
+| `moody`, `dark and moody` | 드라마틱하거나 서사적인 이미지 |
+| `ethereal`, `dreamy`, `cinematic` | 감성적, 예술적 결과물 |
 
 ---
 
 ### 5. 스타일별 키워드
-- **실사 사진:** `photorealistic`, `editorial photography`, `documentary photography`
-- **일러스트:** `digital illustration`, `flat illustration`, `vector art`, `minimal line art`
-- **회화풍:** `oil painting`, `watercolor`, `impressionist style`
-- **3D·그래픽:** `3D render`, `Unreal Engine 5`, `Octane render`, `clay style`
-- **애니메이션:** `anime style`, `cel shading`, `Studio Ghibli style`
-- **레트로:** `1980s retro`, `film grain`, `Polaroid photo`
+
+| 분류 | 키워드 |
+|---|---|
+| 실사 사진 | `photorealistic`, `editorial photography`, `documentary photography` |
+| 일러스트 | `digital illustration`, `flat illustration`, `vector art`, `minimal line art` |
+| 회화풍 | `oil painting`, `watercolor`, `impressionist style` |
+| 3D·그래픽 | `3D render`, `Unreal Engine 5`, `Octane render`, `clay style` |
+| 애니메이션 | `anime style`, `cel shading`, `Studio Ghibli style` |
+| 레트로 | `1980s retro`, `film grain`, `Polaroid photo` |
 
 ---
 
 ### 6. 레이아웃 & 네거티브(제외) 키워드
-- `clean background, centered composition` : 정보가 잘 보이는 구성
-- `ample text-safe area` / `generous negative space` : 제목·문구를 넣을 여백 확보
-- `clear visual hierarchy` : 시각적 위계가 분명한 디자인
-- `limited color palette` : 2~4색으로 절제된 브랜드 톤
-- `no text` : AI가 엉뚱한 가짜 글자를 만들지 않도록 지정
-- **Negative Prompt (제외 표현):**  
-  `blurry, low quality, distorted, deformed hands, extra fingers, watermark, text, logo, duplicate, ugly, oversaturated, checkerboard background`
+
+| 키워드 | 효과 |
+|---|---|
+| `clean background, centered composition` | 정보가 잘 보이는 구성 |
+| `ample text-safe area` / `generous negative space` | 제목·문구를 넣을 여백 확보 |
+| `clear visual hierarchy` | 시각적 위계가 분명한 디자인 |
+| `limited color palette` | 2~4색으로 절제된 브랜드 톤 |
+| `no text` | AI가 엉뚱한 가짜 글자를 만들지 않도록 지정 |
+| **Negative Prompt (제외 표현)** | `blurry, low quality, distorted, deformed hands, extra fingers, watermark, text, logo, duplicate, ugly, oversaturated, checkerboard background` |
 
 ---
 
