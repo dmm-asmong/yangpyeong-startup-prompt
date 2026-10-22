@@ -18,11 +18,11 @@ const raw = readFileSync(path.join(process.cwd(), "content", "handbook.md"), "ut
 // 본문 속 목차 섹션은 사이드 패널이 대신하므로 제거
 const source = raw.replace(/## 📑 목차[\s\S]*?\r?\n---\r?\n/, "");
 
-// 사이드 패널 목차: "# 카테고리 N. …" 제목 (id는 rehype-slug와 같은 github-slugger 규칙)
+// 사이드 패널 목차: "# N. …" 제목 (id는 rehype-slug와 같은 github-slugger 규칙)
 const slugger = new GithubSlugger();
 const toc = [...source.matchAll(/^# (.+)$/gm)].slice(1).map(([, title]) => ({
   id: slugger.slug(title),
-  title: title.replace(/^카테고리 /, ""),
+  title,
 }));
 slugger.reset();
 
