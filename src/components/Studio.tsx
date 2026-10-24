@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import type { OutputId } from "@/data/options";
 import type { Example } from "@/data/examples";
@@ -100,6 +101,12 @@ export default function Studio({ images }: { images: Record<string, string> }) {
             title="이런 창업 브랜드라면? 예시 12개"
             desc="모두 가상의 양평 창업 브랜드예요. 비슷한 예시를 골라 빌더로 불러온 뒤, 내 브랜드 정보로 바꿔 쓰세요."
           />
+          <p className="mb-6 text-base leading-relaxed text-mute">
+            사진 한 장으로 만드는 광고 프롬프트 100개는 문장 구조를 그대로 두고, 대괄호만 채워 복사합니다.{" "}
+            <Link href="/photo-prompts" className="font-bold text-moss underline-offset-2 hover:underline">
+              사진 프롬프트 100 열기
+            </Link>
+          </p>
           <Gallery images={images} onStart={onStart} />
         </div>
       </section>
