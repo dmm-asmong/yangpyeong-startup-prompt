@@ -18,7 +18,10 @@ export default function Header() {
           <Link href="/#guide" className="hidden rounded-lg px-3 py-1.5 hover:text-white md:inline">
             사용 가이드
           </Link>
-          <Link href="/handbook" className="rounded-lg px-3 py-1.5 hover:text-white">
+          <Link href="/photo-prompts" className="rounded-lg px-3 py-1.5 hover:text-white">
+            사진 100
+          </Link>
+          <Link href="/handbook" className="hidden rounded-lg px-3 py-1.5 hover:text-white sm:inline">
             실전 핸드북
           </Link>
         </nav>
