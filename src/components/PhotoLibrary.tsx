@@ -131,7 +131,7 @@ export default function PhotoLibrary() {
           </p>
         )}
 
-        <CopyButton text={applied.text} label="원문 구조 그대로 복사" className="min-h-12 w-full px-4 text-base" />
+        <CopyButton text={applied.text} label="프롬프트 복사" className="min-h-12 w-full px-4 text-base" />
         <pre className="max-h-80 overflow-auto whitespace-pre-wrap rounded-2xl bg-ink px-4 py-3 text-sm leading-relaxed text-white/90">{applied.text}</pre>
       </aside>
     </div>

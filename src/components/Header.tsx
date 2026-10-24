@@ -9,7 +9,7 @@ export default function Header() {
           <Logo dark />
         </Link>
         <nav className="flex items-center gap-1 text-[15px] font-semibold text-white/75">
-          <Link href="/#studio" className="hidden rounded-lg px-3 py-1.5 hover:text-white md:inline">
+          <Link href="/#studio" className="rounded-lg px-3 py-1.5 hover:text-white">
             만들기
           </Link>
           <Link href="/#gallery" className="hidden rounded-lg px-3 py-1.5 hover:text-white md:inline">
@@ -17,9 +17,6 @@ export default function Header() {
           </Link>
           <Link href="/#guide" className="hidden rounded-lg px-3 py-1.5 hover:text-white md:inline">
             사용 가이드
-          </Link>
-          <Link href="/photo-prompts" className="rounded-lg px-3 py-1.5 hover:text-white">
-            사진 100
           </Link>
           <Link href="/handbook" className="hidden rounded-lg px-3 py-1.5 hover:text-white sm:inline">
             실전 핸드북

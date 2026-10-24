@@ -35,10 +35,10 @@ export default function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#studio" className="rounded-2xl bg-moss px-6 py-4 text-base font-extrabold text-white hover:bg-moss-dark">
-              홍보물 만들기 →
+              내 정보로 만들기 →
             </a>
-            <a href="#guide" className="rounded-2xl border border-line bg-card px-6 py-4 text-base font-bold text-ink hover:border-moss">
-              3분 사용법
+            <a href="#photo" className="rounded-2xl border border-line bg-card px-6 py-4 text-base font-bold text-ink hover:border-moss">
+              제품 사진으로 만들기
             </a>
           </div>
           <dl className="mt-10 flex gap-9">

@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { OutputId } from "@/data/options";
 import type { Example } from "@/data/examples";
 import { buildCaption, type Channel } from "@/lib/caption";
@@ -11,6 +10,7 @@ import { resolveCopy } from "@/lib/suggest";
 import { StepBrand, StepDesign, StepOutput } from "./builder/Steps";
 import Gallery from "./Gallery";
 import OutputPanel from "./OutputPanel";
+import PhotoLibrary from "./PhotoLibrary";
 import { SectionTitle } from "./ui";
 
 /** 빌더 + 결과판 + 예시 갤러리. 모든 처리는 브라우저 안에서만 일어나요. */
@@ -19,6 +19,23 @@ export default function Studio({ images }: { images: Record<string, string> }) {
   const [lang, setLang] = useState<Lang>("ko");
   const [channel, setChannel] = useState<Channel>("instagram");
   const [loaded, setLoaded] = useState<string | null>(null);
+  const [mode, setMode] = useState<"info" | "photo">("info");
+
+  useEffect(() => {
+    const sync = () => {
+      const hash = window.location.hash;
+      if (hash === "#photo") setMode("photo");
+      else if (hash === "#studio" || hash === "") setMode("info");
+    };
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
+
+  const chooseMode = (next: "info" | "photo") => {
+    setMode(next);
+    history.replaceState(null, "", next === "photo" ? "#photo" : "#studio");
+  };
 
   const copy = resolveCopy(state);
   const prompt = buildPrompt(state, lang);
@@ -52,6 +69,8 @@ export default function Studio({ images }: { images: Record<string, string> }) {
     setLoaded(null);
   };
   const onStart = (example: Example) => {
+    setMode("info");
+    history.replaceState(null, "", "#studio");
     setState(stateFromExample(example.state));
     setLoaded(example.title);
     document.getElementById("studio")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -62,9 +81,45 @@ export default function Studio({ images }: { images: Record<string, string> }) {
       <section id="studio" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-14 sm:py-20">
         <SectionTitle
           eyebrow="홍보물 만들기"
-          title="세 단계로 내 브랜드 홍보물 프롬프트 완성"
-          desc="고르는 즉시 결과판에 이미지 AI 프롬프트와 홍보 문구가 함께 만들어져요. 복사해서 ChatGPT·Gemini에 붙여 넣으면 끝."
+          title="먼저 만드는 방법을 고르세요"
+          desc="둘 다 복사해서 ChatGPT에 붙여 넣는 프롬프트를 만듭니다. 사진이 없으면 왼쪽, 제품 사진이 있으면 오른쪽입니다."
         />
+        <div id="photo" className="mb-8 grid scroll-mt-24 gap-3 sm:grid-cols-2">
+          <button
+            type="button"
+            aria-pressed={mode === "info"}
+            onClick={() => chooseMode("info")}
+            className={`rounded-[24px] border p-5 text-left transition ${
+              mode === "info" ? "border-moss bg-moss-soft" : "border-line bg-card hover:border-moss/50"
+            }`}
+          >
+            <p className="text-lg font-extrabold text-ink">내 정보로 만들기</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-mute">
+              사진이 없어도 됩니다. 아이템, 고객, 분위기를 고르면 프롬프트와 홍보 문구를 새로 써 줍니다.
+            </p>
+          </button>
+          <button
+            type="button"
+            aria-pressed={mode === "photo"}
+            onClick={() => chooseMode("photo")}
+            className={`rounded-[24px] border p-5 text-left transition ${
+              mode === "photo" ? "border-moss bg-moss-soft" : "border-line bg-card hover:border-moss/50"
+            }`}
+          >
+            <p className="text-lg font-extrabold text-ink">제품 사진으로 만들기</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-mute">
+              찍은 사진을 먼저 첨부합니다. 준비된 장면 중에서 고르고, 빈칸만 내 제품으로 바꿉니다. 장면 문장은 그대로입니다.
+            </p>
+          </button>
+        </div>
+        {mode === "photo" ? (
+          <>
+            <PhotoLibrary />
+            <p className="mt-6 text-sm leading-relaxed text-mute">
+              출처: 프롬왓, 2026-10-20. 1~4번은 결과가 확인된 장면이고, 5~100번은 응용용이라 번호마다 결과를 확인한 것은 아닙니다.
+            </p>
+          </>
+        ) : (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_440px] lg:items-start">
           <div className="space-y-5">
             <StepBrand state={state} onPatch={patch} />
@@ -92,6 +147,7 @@ export default function Studio({ images }: { images: Record<string, string> }) {
             />
           </div>
         </div>
+        )}
       </section>
 
       <section id="gallery" className="scroll-mt-16 border-t border-line bg-card py-14 sm:py-20">
@@ -99,14 +155,8 @@ export default function Studio({ images }: { images: Record<string, string> }) {
           <SectionTitle
             eyebrow="예시 갤러리"
             title="이런 창업 브랜드라면? 예시 12개"
-            desc="모두 가상의 양평 창업 브랜드예요. 비슷한 예시를 골라 빌더로 불러온 뒤, 내 브랜드 정보로 바꿔 쓰세요."
+            desc="모두 가상의 양평 창업 브랜드예요. 고르면 위의 '내 정보로 만들기'에 불러와집니다. 제품 사진이 있으면 그 방법을 쓰세요."
           />
-          <p className="mb-6 text-base leading-relaxed text-mute">
-            사진 한 장으로 만드는 광고 프롬프트 100개는 문장 구조를 그대로 두고, 대괄호만 채워 복사합니다.{" "}
-            <Link href="/photo-prompts" className="font-bold text-moss underline-offset-2 hover:underline">
-              사진 프롬프트 100 열기
-            </Link>
-          </p>
           <Gallery images={images} onStart={onStart} />
         </div>
       </section>
